@@ -11,13 +11,19 @@
     font-family: "Ubuntu", sans-serif;
 }
 
+body{
+    background-image: url('https://images.unsplash.com/photo-1733503711060-1df31554390f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 header {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 60px;
     width:100vw;
-    background: #f13561;
+    background: transparent;
     justify-content: space-between;
     padding: 20px 100px;
 }
