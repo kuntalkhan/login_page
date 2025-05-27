@@ -1,9 +1,17 @@
+
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-:root{
-    --btn_bg_color:#0051ff;
+/* Define CSS variables for consistent theming */
+:root {
+    --btn_bg_color: #0051ff;
     --btn_bg_hover: #0339ae;
+    --text_color: #fff;
+    --form_bg_color: rgba(255, 255, 255, 0.1); /* Semi-transparent white for form */
+    --form_border_color: rgba(255, 255, 255, 0.3); /* Lighter border for form */
 }
+
+/* Global reset and font family */
 * {
     padding: 0;
     margin: 0;
@@ -11,48 +19,65 @@
     font-family: "Ubuntu", sans-serif;
 }
 
-body{
+/* Body styling for background and centering content */
+body {
     background-image: url('https://images.unsplash.com/photo-1733503711060-1df31554390f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center; /* Center the background image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Vertically center the container */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    overflow: hidden; /* Prevent scrollbars if content overflows slightly */
 }
 
+/* Header styling */
 header {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 60px;
-    width:100vw;
+    width: 100vw;
     background: transparent;
     justify-content: space-between;
     padding: 20px 100px;
-}
-.logo {
-    font-size: 2rem;  
-    color: white;
+    position: absolute; /* Position header absolutely to not interfere with body's flex centering */
+    top: 0;
+    left: 0;
+    z-index: 10; /* Ensure header is above other content */
 }
 
+.logo {
+    font-size: 2rem;
+    color: var(--text_color);
+    user-select: none; /* Prevent text selection */
+}
+
+/* Navigation links styling */
 .navigation a {
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 500;
-    margin-left:40px;
-    color: #fff;
+    margin-left: 40px;
+    color: var(--text_color);
     position: relative;
-
+    transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
+/* Underline effect for navigation links */
 .navigation a::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom:-5px;
-    width:100% ;
+    bottom: -5px;
+    width: 100%;
     height: 3px;
-    background-color: #fff;
+    background-color: var(--text_color);
     border-radius: 7px;
     transform: scaleX(0);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
     transform-origin: right;
 }
 
@@ -61,22 +86,221 @@ header {
     transform: scaleX(1);
 }
 
+/* Login button in navigation */
 .navigation .login_nav_btn {
     height: 40px;
     width: 100px;
     background-color: transparent;
-    border: 2px solid #fff;
+    border: 2px solid var(--text_color);
     font-size: 1.1rem;
     border-radius: 15px;
     margin-left: 40px;
     outline: none;
-    color:#fff;
+    color: var(--text_color);
     font-weight: 500;
     cursor: pointer;
     transition: .5s ease-in-out;
 }
 
 .navigation .login_nav_btn:hover {
-    background-color: #fff;
-    color: #222222;
+    background-color: var(--text_color);
+    color: #222222; /* Darker text on hover */
+}
+
+/* Main container for the login form */
+.container {
+    background-color: var(--form_bg_color); /* Transparent background */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+    backdrop-filter: blur(15px); /* Stronger blur effect */
+    border: 1px solid var(--form_border_color); /* Subtle border */
+    padding: 2.5em; /* Increased padding */
+    width: 420px; /* Slightly wider */
+    color: var(--text_color);
+    position: relative; /* Needed for potential absolute positioning of icons */
+    z-index: 1; /* Ensure container is above background but below header */
+}
+
+/* Login form heading */
+.form_box_login h2 {
+    text-align: center;
+    margin-bottom: 2em; /* More space below heading */
+    color: var(--text_color);
+    font-size: 2.2rem; /* Larger font size */
+    font-weight: 600;
+}
+
+/* Input box styling */
+.input_box {
+    position: relative;
+    margin-bottom: 2.5em; /* More space between input fields */
+    width: 100%;
+    height: 50px; /* Fixed height for consistency */
+}
+
+.input_box input {
+    width: 100%;
+    height: 100%;
+    padding: 0 1.5em 0 0.5em; /* Adjust padding for icon */
+    border: none;
+    border-bottom: 2px solid var(--text_color); /* White bottom border */
+    background: transparent;
+    outline: none;
+    font-size: 1.1em;
+    color: var(--text_color);
+    transition: border-color 0.3s ease;
+}
+
+.input_box input:focus {
+    border-bottom-color: var(--btn_bg_color); /* Highlight border on focus */
+}
+
+/* Floating label effect */
+.input_box label {
+    position: absolute;
+    left: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text_color);
+    pointer-events: none;
+    transition: 0.3s ease-in-out;
+    font-size: 1em;
+}
+
+.input_box input:focus + label,
+.input_box input:valid + label {
+    top: -5px; /* Move label above input */
+    font-size: 0.8em; /* Shrink label */
+    color: var(--text_color); /* Keep label color white */
+}
+
+/* Icon styling (requires a font icon library like Font Awesome if you want actual icons) */
+.input_box .icon {
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: var(--text_color);
+}
+
+/* Remember me and Forgot password section */
+.remember_forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.8em;
+    font-size: 0.95em;
+}
+
+.remember_forgot label {
+    color: var(--text_color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.remember_forgot label input[type="checkbox"] {
+    margin-right: 0.5em;
+    accent-color: var(--btn_bg_color); /* Style checkbox */
+}
+
+.remember_forgot a {
+    color: var(--text_color);
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.remember_forgot a:hover {
+    text-decoration: underline;
+}
+
+/* Login button styling */
+.btn {
+    width: 100%;
+    padding: 0.9em; /* Increased padding */
+    background-color: var(--btn_bg_color);
+    color: white;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded */
+    cursor: pointer;
+    font-size: 1.15em;
+    font-weight: 500;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: var(--btn_bg_hover);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Register link section */
+.login_register {
+    text-align: center;
+    margin-top: 2em;
+    font-size: 0.95em;
+    color: var(--text_color);
+}
+
+.login_register p a {
+    color: var(--text_color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.login_register p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 30px;
+    }
+
+    .navigation a {
+        margin-left: 20px;
+    }
+
+    .navigation .login_nav_btn {
+        margin-left: 20px;
+    }
+
+    .container {
+        width: 90%; /* Make container take more width on smaller screens */
+        padding: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .navigation {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navigation a,
+    .navigation .login_nav_btn {
+        margin: 5px 10px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 1em;
+    }
+
+    .form_box_login h2 {
+        font-size: 1.8rem;
+    }
 }
